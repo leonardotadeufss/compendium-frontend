@@ -10,8 +10,7 @@ import Loader from '../src/components/Loader'
 import axios from './api'
 
 
-export async function getStaticProps(context) {
-
+export async function getServerSideProps(context) {
 
   function shuffle(array) {
     var m = array.length, t, i;
@@ -32,6 +31,15 @@ export async function getStaticProps(context) {
     .catch(function (error) {
       console.log(error);
     })
+
+  if (!series) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
   return {
     props: { series }, // will be passed to the page component as props
   }
