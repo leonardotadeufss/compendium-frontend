@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from './style'
 
 export default function Expander({ value, handleClick }) {
-    return <Button state={value} onClick={handleClick}>^</Button>
+    const [isClicked, setClick] = useState(false)
+
+
+    return <Button state={value} onClick={() => {
+        setClick(!isClicked)
+        handleClick()
+    }}>{isClicked ? "Fechar" : "Ver mais"}
+    </Button>
 }
