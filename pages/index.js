@@ -11,6 +11,20 @@ import axios from './api'
 
 
 export async function getStaticProps(context) {
+
+
+  function shuffle(array) {
+    var m = array.length, t, i;
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+
+    return array;
+  }
+
   const series = await axios.get('/series')
     .then(function (response) {
       return (shuffle(response["data"]))
@@ -36,10 +50,6 @@ function Home(props) {
 
   const taglist = ['D&D', 'Tormenta20', 'Finalizada', 'Em andamento']
 
-
-  // useEffect(() => {
-  //   loadData()
-  // }, [])
 
   function loadMore() {
     if (page * pageSize > series.length) {
@@ -102,15 +112,3 @@ function Home(props) {
 export default Home;
 
 
-
-function shuffle(array) {
-  var m = array.length, t, i;
-  while (m) {
-    i = Math.floor(Math.random() * m--);
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
-  }
-
-  return array;
-}
