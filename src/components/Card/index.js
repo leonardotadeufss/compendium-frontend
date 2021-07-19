@@ -12,7 +12,7 @@ import Expander from '../Expander';
 
 
 
-export default function Card({ children, isLoading, OnClick }) {
+export default function Card({ children, OnClick }) {
     const [clicked, setClick] = useState(false);
     const { avatar, name, creator, youtubeLink, resume, twitchLink, spotifyLink, status, tags } = children;
 
@@ -22,19 +22,7 @@ export default function Card({ children, isLoading, OnClick }) {
 
     const src = avatar;
 
-    if (isLoading) {
-        return (
-            <SkelletonContainer>
-                <p></p>
-                <Title />
-                <TagWrapper>
-                    <Tag size="small">Skelleton Tag 1</Tag>
-                    <Tag size="small">Skelleton Tag 2</Tag>
-                </TagWrapper>
-                <h1>...</h1>
-            </SkelletonContainer>)
 
-    }
     return (
         <Container >
             <Title variant={'Light'}>{creator}</Title>
