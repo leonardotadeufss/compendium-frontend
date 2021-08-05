@@ -8,7 +8,7 @@ import { CardWrapper } from '../src/components/Card/style';
 import { SeriesContext } from '../src/providers/series.js';
 import Loader from '../src/components/Loader'
 import axios from './api'
-
+import Layout from '../src/components/Layout'
 
 export async function getServerSideProps(context) {
 
@@ -90,30 +90,33 @@ function Home(props) {
   }
 
   return (
-    <div className="App">
-      <Header />
-      <TagWrapper>
-        {taglist.map((tag) => <Tag title={tag} key={tag} OnClick={filterByTag} />)}
-      </TagWrapper>
-      {currentTag &&
+    <>
+      <Layout pageTitle="Compendium RPG | Home" />
+      <div className="App">
+        <Header />
         <TagWrapper>
-          <Tag title={currentTag} key={currentTag} OnClick={removeFilter}>
-            <p>
-              x
-            </p>
-          </Tag>
-        </TagWrapper>}
-      <InfiniteScroll
-        dataLength={currentSeries.length} //This is important field to render the next data
-        next={loadMore}
-        hasMore={hasMore}
-        loader={<Loader />}
-        endMessage={""} >
-        <CardWrapper>
-          {currentSeries.map(serie => <Card key={serie._id} OnClick={filterByTag}>{serie}</Card>)}
-        </CardWrapper>
-      </InfiniteScroll>
-    </div >
+          {taglist.map((tag) => <Tag title={tag} key={tag} OnClick={filterByTag} />)}
+        </TagWrapper>
+        {currentTag &&
+          <TagWrapper>
+            <Tag title={currentTag} key={currentTag} OnClick={removeFilter}>
+              <p>
+                x
+              </p>
+            </Tag>
+          </TagWrapper>}
+        <InfiniteScroll
+          dataLength={currentSeries.length} //This is important field to render the next data
+          next={loadMore}
+          hasMore={hasMore}
+          loader={<Loader />}
+          endMessage={""} >
+          <CardWrapper>
+            {currentSeries.map(serie => <Card key={serie._id} OnClick={filterByTag}>{serie}</Card>)}
+          </CardWrapper>
+        </InfiniteScroll>
+      </div >
+    </>
   );
 }
 

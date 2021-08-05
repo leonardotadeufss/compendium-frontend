@@ -1,4 +1,5 @@
 import React from 'react'
+import Layout from '../src/components/Layout'
 import emailjs from 'emailjs-com';
 import { useForm } from 'react-hook-form'
 import Header from '../src/components/Header'
@@ -31,6 +32,7 @@ function Contact() {
 
     return (
         <>
+            <Layout />
             <Header />
             <Container>
 
